@@ -16,12 +16,12 @@ pipeline{
                 bat 'mvn compile'
             }
         }
-        stages('Test'){
+        stage('Test'){
              steps{
                 bat 'mvn test'
              }
         }
-        stages('package'){
+        stage('package'){
             steps{
                 bat 'mvn package'
             }
