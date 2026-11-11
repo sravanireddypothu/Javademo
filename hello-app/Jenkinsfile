@@ -1,29 +1,41 @@
-pipeline{
+```groovy
+pipeline {
     agent any
-    tools{
+
+    tools {
         jdk 'JDK21'
         maven 'Maven'
     }
-    stages{
-        stage('Checkout'){
-            steps{
-                git branch:'main',
-                url:'https://github.com/sravanireddypothu/Javademo.git'
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/sravanireddypothu/Javademo.git'
             }
         }
-        stage('compile'){
-            steps{
-                bat 'mvn compile'
+
+        stage('Compile') {
+            steps {
+                dir('hello-app') {
+                    bat 'mvn compile'
+                }
             }
         }
-        stage('Test'){
-             steps{
-                bat 'mvn test'
-             }
+
+        stage('Test') {
+            steps {
+                dir('hello-app') {
+                    bat 'mvn test'
+                }
+            }
         }
-        stage('package'){
-            steps{
-                bat 'mvn package'
+
+        stage('Package') {
+            steps {
+                dir('hello-app') {
+                    bat 'mvn package'
+                }
             }
         }
     }
